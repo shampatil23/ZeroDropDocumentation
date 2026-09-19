@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zero Drop Documentation — Dairy Health Intelligence</title>
+  <meta name="description" content="Official technical documentation for Zero Drop — an AI-powered dairy health monitoring and early mastitis-risk forecasting platform for Indian dairy farms." />
+  <meta name="keywords" content="Zero Drop, mastitis, dairy health, IoT, AI, machine learning, XGBoost, SHAP, Gemini, smart belt, dairy farm" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- SEARCH OVERLAY -->
+<div id="search-overlay" class="search-overlay" role="dialog" aria-modal="true" aria-label="Documentation search">
+  <div class="search-modal">
+    <div class="search-input-wrap">
+      <svg class="search-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="search-input" placeholder="Search Zero Drop documentation..." autocomplete="off" aria-label="Search documentation" />
+      <kbd class="search-esc-key">Esc</kbd>
+    </div>
+    <div id="search-results" class="search-results" role="listbox" aria-label="Search results"></div>
+    <div class="search-footer">
+      <span class="search-hint"><kbd>up</kbd><kbd>dn</kbd> navigate</span>
+      <span class="search-hint"><kbd>Enter</kbd> select</span>
+      <span class="search-hint"><kbd>Esc</kbd> close</span>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header" role="banner">
+  <div class="header-inner">
+    <div class="header-left">
+      <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <a href="#" class="site-logo" data-page="home" aria-label="Zero Drop home">
+        <div class="logo-icon" aria-hidden="true">
+          <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="18" r="17" fill="#009B6B" opacity="0.12"/>
+            <path d="M18 8C18 8 10 14 10 21C10 25.4183 13.5817 29 18 29C22.4183 29 26 25.4183 26 21C26 14 18 8 18 8Z" fill="#009B6B"/>
+            <path d="M18 14C18 14 14 17.5 14 21C14 23.2091 15.7909 25 18 25C20.2091 25 22 23.2091 22 21C22 17.5 18 14 18 14Z" fill="white" opacity="0.85"/>
+            <circle cx="18" cy="21" r="2.5" fill="#009B6B"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-name">ZERO DROP</span>
+          <span class="logo-subtitle">Dairy Health Intelligence</span>
+        </div>
+      </a>
+      <nav class="header-nav" aria-label="Main navigation">
+        <a href="#" class="nav-link active" data-page="home">Docs</a>
+        <a href="#" class="nav-link" data-page="how-it-works">Guides</a>
+        <a href="#" class="nav-link" data-page="ai-overview">AI &amp; ML</a>
+        <a href="#" class="nav-link" data-page="hardware-overview">Hardware</a>
+        <a href="#" class="nav-link" data-page="api-authentication">API Reference</a>
+      </nav>
+    </div>
+    <div class="header-right">
+      <button class="icon-btn search-icon-btn" id="search-btn" aria-label="Search documentation (Ctrl+K)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <span class="search-shortcut">Ctrl K</span>
+      </button>
+      <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub repository">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+      <div class="lang-select-wrap">
+        <select class="lang-select" aria-label="Select language">
+          <option value="en">EN</option>
+          <option value="hi">हिन्दी</option>
+          <option value="mr">मराठी</option>
+          <option value="gu">ગુજરાતી</option>
+          <option value="pa">ਪੰਜਾਬੀ</option>
+          <option value="ta">தமிழ்</option>
+          <option value="te">తెలుగు</option>
+          <option value="kn">ಕನ್ನಡ</option>
+          <option value="ml">മലയാളം</option>
+        </select>
+      </div>
+      <a href="#" class="btn-dashboard">
+        Open Dashboard
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- LAYOUT -->
+<div class="layout-wrapper">
+
+  <!-- SIDEBAR OVERLAY (mobile) -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar" role="navigation" aria-label="Documentation navigation">
+    <!-- Collapse Toggle -->
+    <button class="sidebar-collapse-btn" id="sidebar-collapse-btn" aria-label="Collapse sidebar" title="Collapse sidebar">
+      <svg class="collapse-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      <svg class="collapse-icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <div class="sidebar-inner">
+      <nav class="sidebar-nav">
+
+        <div class="sidebar-section">
+          <button class="section-toggle" aria-expanded="true" data-section="get-started">
+            <span>GET STARTED</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <ul class="section-items" id="section-get-started">
+            <li><a href="#" class="sidebar-link" data-page="home">Introduction</a></li>
+            <li><a href="#" class="sidebar-link" data-page="what-is-zerodrop">What is Zero Drop?</a></li>
+            <li><a href="#" class="sidebar-link" data-page="how-it-works">How It Works</a></li>
+            <li><a href="#" class="sidebar-link" data-page="quick-start">Quick Start</a></li>
+            <li><a href="#" class="sidebar-link" data-page="system-requirements">System Requirements</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-section">
+          <button class="section-toggle" aria-expanded="true" data-section="platform">
+            <span>PLATFORM</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <ul class="section-items" id="section-platform">
+            <li><a href="#" class="sidebar-link" data-page="dashboard">Dashboard</a></li>
+            <li><a href="#" class="sidebar-link" data-page="animal-management">Animal Management</a></li>
+            <li><a href="#" class="sidebar-link" data-page="health-monitoring">Health Monitoring</a></li>
+            <li><a href="#" class="sidebar-link" data-page="smart-belt-iot">Smart Belt IoT</a></li>
+            <li><a href="#" class="sidebar-link" data-page="alerts">Alerts</a></li>
+            <li><a href="#" class="sidebar-link" data-page="recommendations">Recommendations</a></li>
+            <li><a href="#" class="sidebar-link" data-page="reports">Reports</a></li>
+            <li><a href="#" class="sidebar-link" data-page="farm-risk-map">Farm Risk Map</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-section">
+          <button class="section-toggle" aria-expanded="true" data-section="ai-ml">
+            <span>AI &amp; MACHINE LEARNING</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <ul class="section-items" id="section-ai-ml">
+            <li><a href="#" class="sidebar-link" data-page="ai-overview">AI Overview</a></li>
+            <li><a href="#" class="sidebar-link" data-page="data-pipeline">Data Pipeline</a></li>
+            <li><a href="#" class="sidebar-link" data-page="feature-engineering">Feature Engineering</a></li>
+            <li><a href="#" class="sidebar-link" data-page="risk-prediction">Risk Prediction</a></li>
+            <li><a href="#" class="sidebar-link" data-page="risk-classification">Risk Classification</a></li>
+            <li><a href="#" class="sidebar-link" data-page="xgboost">XGBoost</a></li>
+            <li><a href="#" class="sidebar-link" data-page="shap-explainability">SHAP Explainability</a></li>
+            <li><a href="#" class="sidebar-link" data-page="ai-recommendations">AI Recommendations</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-section">
+          <button class="section-toggle" aria-expanded="true" data-section="iot-hardware">
+            <span>IOT &amp; HARDWARE</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <ul class="section-items" id="section-iot-hardware">
+            <li><a href="#" class="sidebar-link" data-page="hardware-overview">Hardware Overview</a></li>
+            <li><a href="#" class="sidebar-link" data-page="smart-neck-belt">Smart Neck Belt</a></li>
+            <li><a href="#" class="sidebar-link" data-page="temperature">Temperature</a></li>
+            <li><a href="#" class="sidebar-link" data-page="activity">Activity</a></li>
+            <li><a href="#" class="sidebar-link" data-page="rumination">Rumination</a></li>
+            <li><a href="#" class="sidebar-link" data-page="milk-conductivity">Milk Conductivity</a></li>
+            <li><a href="#" class="sidebar-link" data-page="gps">GPS</a></li>
+            <li><a href="#" class="sidebar-link" data-page="esp32">ESP32</a></li>
+            <li><a href="#" class="sidebar-link" data-page="nrf52840">nRF52840</a></li>
+            <li><a href="#" class="sidebar-link" data-page="communication">Communication</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-section">
+          <button class="section-toggle" aria-expanded="true" data-section="architecture">
+            <span>ARCHITECTURE</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <ul class="section-items" id="section-architecture">
+            <li><a href="#" class="sidebar-link" data-page="system-architecture">System Architecture</a></li>
+            <li><a href="#" class="sidebar-link" data-page="data-flow">Data Flow</a></li>
+            <li><a href="#" class="sidebar-link" data-page="software-architecture">Software Architecture</a></li>
+            <li><a href="#" class="sidebar-link" data-page="hardware-architecture">Hardware Architecture</a></li>
+            <li><a href="#" class="sidebar-link" data-page="ai-architecture">AI Architecture</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-section">
+          <button class="section-toggle" aria-expanded="true" data-section="api-ref">
+            <span>API REFERENCE</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <ul class="section-items" id="section-api-ref">
+            <li><a href="#" class="sidebar-link" data-page="api-authentication">Authentication</a></li>
+            <li><a href="#" class="sidebar-link" data-page="api-animals">Animals</a></li>
+            <li><a href="#" class="sidebar-link" data-page="api-health-records">Health Records</a></li>
+            <li><a href="#" class="sidebar-link" data-page="api-sensor-data">Sensor Data</a></li>
+            <li><a href="#" class="sidebar-link" data-page="api-milk-records">Milk Records</a></li>
+            <li><a href="#" class="sidebar-link" data-page="api-predictions">Risk Prediction</a></li>
+            <li><a href="#" class="sidebar-link" data-page="api-alerts">Alerts</a></li>
+            <li><a href="#" class="sidebar-link" data-page="api-recommendations">Recommendations</a></li>
+            <li><a href="#" class="sidebar-link" data-page="api-reports">Reports</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-section">
+          <button class="section-toggle" aria-expanded="true" data-section="data-model">
+            <span>DATA MODEL</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <ul class="section-items" id="section-data-model">
+            <li><a href="#" class="sidebar-link" data-page="model-animal">Animal</a></li>
+            <li><a href="#" class="sidebar-link" data-page="model-health-record">Health Record</a></li>
+            <li><a href="#" class="sidebar-link" data-page="model-sensor-record">Sensor Record</a></li>
+            <li><a href="#" class="sidebar-link" data-page="model-milk-record">Milk Record</a></li>
+            <li><a href="#" class="sidebar-link" data-page="model-risk-assessment">Risk Assessment</a></li>
+            <li><a href="#" class="sidebar-link" data-page="model-alert">Alert</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-section">
+          <button class="section-toggle" aria-expanded="true" data-section="mobile-app">
+            <span>MOBILE APP</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <ul class="section-items" id="section-mobile-app">
+            <li><a href="#" class="sidebar-link" data-page="mobile-installation">Installation</a></li>
+            <li><a href="#" class="sidebar-link" data-page="mobile-authentication">Authentication</a></li>
+            <li><a href="#" class="sidebar-link" data-page="mobile-scan-animal">Scan Animal</a></li>
+            <li><a href="#" class="sidebar-link" data-page="mobile-notifications">Notifications</a></li>
+            <li><a href="#" class="sidebar-link" data-page="mobile-offline">Offline Mode</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-section">
+          <button class="section-toggle" aria-expanded="true" data-section="resources">
+            <span>RESOURCES</span>
+            <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <ul class="section-items" id="section-resources">
+            <li><a href="#" class="sidebar-link" data-page="faq">FAQ</a></li>
+            <li><a href="#" class="sidebar-link" data-page="research-references">Research &amp; References</a></li>
+            <li><a href="#" class="sidebar-link" data-page="glossary">Glossary</a></li>
+            <li><a href="#" class="sidebar-link" data-page="troubleshooting">Troubleshooting</a></li>
+            <li><a href="#" class="sidebar-link" data-page="changelog">Changelog</a></li>
+          </ul>
+        </div>
+
+      </nav>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content" id="main-content" role="main">
+    <div class="content-wrapper">
+      <nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb"></nav>
+      <article class="doc-content" id="doc-content" tabindex="-1"></article>
+      <div class="doc-nav-footer" id="doc-nav-footer"></div>
+    </div>
+  </main>
+
+  <!-- RIGHT TOC -->
+  <aside class="toc-sidebar" id="toc-sidebar" aria-label="On this page">
+    <div class="toc-inner">
+      <p class="toc-title">ON THIS PAGE</p>
+      <nav id="toc-nav" class="toc-nav"></nav>
+    </div>
+  </aside>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
